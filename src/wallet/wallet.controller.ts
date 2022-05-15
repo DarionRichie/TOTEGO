@@ -1,4 +1,4 @@
-import { Controller, Get, Req } from '@nestjs/common';
+import { Controller, Get, Query, Req } from '@nestjs/common';
 import { WalletService } from './wallet.service';
 
 import { Request } from '@nestjs/common';
@@ -12,5 +12,10 @@ export class WalletController {
   async getWallet(): Promise<string> {
     let createWallet: any = await this.walletService.getWallet();
     return JSON.stringify(createWallet);
+  }
+
+  @Get("get_address_by_pri")
+  getAddressByPri(@Query("pri") pri : string): string {
+    return this.walletService.getAddreeByPri(pri);
   }
 }

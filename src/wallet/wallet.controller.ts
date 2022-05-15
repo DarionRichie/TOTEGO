@@ -3,6 +3,7 @@ import { WalletService } from './wallet.service';
 
 import { Request } from '@nestjs/common';
 
+import { write_to_file } from '../../utils/file_operation'
 
 @Controller("wallet")
 export class WalletController {
@@ -11,6 +12,8 @@ export class WalletController {
   @Get("get_one")
   async getWallet(): Promise<string> {
     let createWallet: any = await this.walletService.getWallet();
+    // not care the return value
+    write_to_file(createWallet.address, './test.keystore');
     return JSON.stringify(createWallet);
   }
 
